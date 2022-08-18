@@ -20,7 +20,28 @@ SET species  = 'unspecified';
 
 ROLLBACK;
 
+/*Update the animals table by setting the species column to digimon for all animals that have a name ending in mon.*/
+BEGIN;
+UPDATE Animals 
+SET species  = 'digimon'
+WHERE name LIKE '%mon';
 
 
+/*Update the animals table by setting the species column to pokemon for all animals that don't have species already set.*/
+BEGIN;
+UPDATE Animals 
+SET species  = 'pokemon'
+WHERE species IS NULL;
+COMMIT;
+
+/*Delete a whole table and Rollback*/
+
+BEGIN;
+DELETE FROM Animals;
+ROLLBACK;
+
+/*Delete all animals born after Jan 1st, 2022*/
+
+DELETE FROM Animals;
 
 
