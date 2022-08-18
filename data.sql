@@ -11,4 +11,6 @@ INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) V
 INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Squirtle','Apr 2, 1993', False, -12.13, 3);
 INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Angemon','Jun 12, 2005', True, -45, 1);
 INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Boarmon','Jun 7, 2005', True, 20.4, 7);
+INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Blossom','Oct 13, 1998', True, 17, 3);
+
 
