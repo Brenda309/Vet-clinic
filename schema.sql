@@ -6,3 +6,8 @@ escape_attempts INT,
 neutered  BOOLEAN, 
  weight_kg float);
 
+/* Update the table by adding a new column */
+ALTER TABLE Animals
+ ADD species varchar(255);
+ 
+
