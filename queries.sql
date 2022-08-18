@@ -10,7 +10,15 @@ SELECT * FROM Animals WHERE name != ' Gabumon';
 SELECT * FROM Animals WHERE weight_kg BETWEEN 10.4 AND 17.3;
 
 
+/*Update table*/ 
 
+BEGIN;
+UPDATE Animals 
+SET species  = 'unspecified';
+
+/*Undo the chance*/ 
+
+ROLLBACK;
 
 
 
