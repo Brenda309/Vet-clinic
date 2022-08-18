@@ -42,6 +42,15 @@ ROLLBACK;
 
 /*Delete all animals born after Jan 1st, 2022*/
 
-DELETE FROM Animals;
+DELETE FROM Animals; 
+WHERE date_of_birth >  'Jan, 1, 2022';
 
+/*Create a savepoint for the transaction.*/
+BEGIN;
+ SAVEPOINT SP1;
 
+/*Update all animals' weight to be their weight multiplied by -1*/
+UPDATE Animals
+SET weight_kg = -1;
+
+/*Rollback to the savepoint*/
