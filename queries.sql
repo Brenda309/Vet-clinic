@@ -1,3 +1,5 @@
+/*Animals*/
+
 /*Queries that provide answers to the questions from all projects.*/
 
 SELECT * FROM Animals WHERE name LIKE '%mon'; 
@@ -87,3 +89,7 @@ SELECT neutered, SUM(escape_attempts) FROM Animals GROUP BY neutered;
 SELECT species, AVG(escape_attempts) FROM Animals 
  WHERE date_of_birth BETWEEN 'Jan, 1, 1990' AND 'Dec, 31, 2000'
  GROUP BY species;
+
+/*Owners*/
+
+ /*species*/

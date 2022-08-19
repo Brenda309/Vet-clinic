@@ -10,17 +10,23 @@ neutered  BOOLEAN,
 /* Update the table by adding a new column */
 ALTER TABLE Animals
  ADD species varchar(255);
- 
 
+/*Make sure that id is set as autoincremented PRIMARY KEY*/
+ALTER TABLE Animals
+ADD CONSTRAINT Animals_pk PRIMARY KEY (id);
+
+/*Remove column species*/
+ALTER TABLE Animals
+DROP species;
 /*Owners*/
 CREATE TABLE Owners (
- id INT NOT NULL AUTO_INCREMENT,
+ id SERIAL PRIMARY KEY,
  full_name varchar(111),
  age INT,
  PRIMARY KEY(id));
 
  /*species*/
  CREATE TABLE Species (
- id INT NOT NULL AUTO_INCREMENT,
- name varchar(111),
- PRIMARY KEY(id));
+ id SERIAL PRIMARY KEY,
+ name varchar(111));
+
