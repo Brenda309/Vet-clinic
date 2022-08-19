@@ -14,9 +14,13 @@ ALTER TABLE Animals
 
 /*Owners*/
 CREATE TABLE Owners (
- id INT NOT NULL AUTO_INCREMENT,, 
+ id INT NOT NULL AUTO_INCREMENT,
  full_name varchar(111),
  age INT,
  PRIMARY KEY(id));
 
- 
+ /*species*/
+ CREATE TABLE Species (
+ id INT NOT NULL AUTO_INCREMENT,
+ name varchar(111),
+ PRIMARY KEY(id));
