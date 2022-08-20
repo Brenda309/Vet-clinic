@@ -88,10 +88,21 @@ INSERT INTO Vets(name, age,  date_of_graduation) VALUES('Stephanie Mendez', 64, 
 INSERT INTO Vets(name, age,  date_of_graduation) VALUES('Jack Harkness', 38, 'Jun 8, 2008');
 
  /*specializations*/
- INSERT INTO specializations (vet_id, spicies_id) VALUES ( (SELECT id FROM vets WHERE name = 'William Tatcher'), (SELECT id FROM spicies WHERE name = 'Pokemon'));
-INSERT INTO specializations (vet_id, spicies_id) VALUES ((SELECT id FROM vets WHERE name = 'Stephanie Mendez'), (SELECT id FROM spicies WHERE name = 'Pokemon'));
-INSERT INTO specializations (vet_id, spicies_id) VALUES ((SELECT id FROM vets WHERE name = 'Stephanie Mendez'), (SELECT id FROM spicies WHERE name = 'Digimon'));
-INSERT INTO specializations (vet_id, spicies_id) VALUES ((SELECT id FROM vets WHERE name = 'Jack Harkness'), (SELECT id FROM spicies WHERE name = 'Digimon'));
+ INSERT INTO specializations (vet_id, spicies_id) VALUES(
+  (SELECT id FROM vets WHERE name = 'William Tatcher'), 
+  (SELECT id FROM spicies WHERE name = 'Pokemon'));
+
+INSERT INTO specializations (vet_id, spicies_id) VALUES (
+    (SELECT id FROM vets WHERE name = 'Stephanie Mendez'), 
+    (SELECT id FROM spicies WHERE name = 'Pokemon'));
+
+INSERT INTO specializations (vet_id, spicies_id) VALUES (
+    (SELECT id FROM vets WHERE name = 'Jack Harkness'), 
+    (SELECT id FROM spicies WHERE name = 'Digimon'));
+
+INSERT INTO specializations (vet_id, spicies_id) VALUES (
+    (SELECT id FROM vets WHERE name = 'Stephanie Mendez'), 
+    (SELECT id FROM spicies WHERE name = 'Digimon'));
 
  /* Modify your inserted animals so it includes the species_id value */
  BEGIN;
