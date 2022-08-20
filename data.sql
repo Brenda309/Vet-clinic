@@ -84,12 +84,12 @@ INSERT INTO Species (name) VALUES('Digimon');
  /* Modify your inserted animals so it includes the species_id value */
  BEGIN;
  UPDATE Animals
- SET species_id = 2
+ SET species_id = 1
  WHERE name LIKE '%mon';
 
 UPDATE Animals
 SET species_id = 2
-WHERE species_id = NULL;
+WHERE species_id IS NULL;
 COMMIT;
 
 /*Modify your inserted animals to include owner information (owner_id)*/

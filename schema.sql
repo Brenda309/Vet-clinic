@@ -21,7 +21,7 @@ DROP species;
 
 /*Add column species_id which is a foreign key referencing species table*/
 ALTER TABLE Animals
-ADD COLUMN species_id varchar(111);
+ADD COLUMN species_id INT;
 
 ALTER TABLE Animals
 ADD CONSTRAINT species_fk

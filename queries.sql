@@ -35,7 +35,7 @@ SELECT species, AVG(escape_attempts) FROM Animals
  WHERE date_of_birth BETWEEN 'Jan, 1, 1990' AND 'Dec, 31, 2000'
  GROUP BY species;
 
-/*Owners*/
+
 -- What animals belong to Melody Pond?
 SELECT Animals.name, owners.full_name 
 FROM Owners
@@ -43,10 +43,39 @@ INNER JOIN Animals ON Owners.id = Animals.owners_id
 WHERE full_name =' Melody Pond';
 
 -- List of all animals that are pokemon (their type is Pokemon)
-SELECT Animals.name, Species.name 
+SELECT Animals.name, Species.name  
+FROM Animals
+JOIN Species ON species_id = Species.id
+WHERE Species.name = 'Pokemon';
+
+-- List all owners and their animals, remember to include those that don't own any animal
+SELECT owners.full_name, Animals.name
 FROM Owners
-INNER JOIN Animals ON Species.id = Animals.species_id;
-WHERE name = ' Pokemon';
+ JOIN Animals ON Owners.id = Animals.owners_id
+WHERE Owners.id = Animals.owners_id
+OR  Owners.id != Animals.owners_id;
+
+--How many animals are there per species?
+SELECT COUNT(*) FROM Animals, species
+FROM Animals
+JOIN Species ON species_id = Species.id
+ GROUP BY species;
 
 
- /*species*/
+
+--List all Digimon owned by Jennifer Orwell.
+SELECT Species.name, Animals.name, Owners.full_name
+FROM Owners
+JOIN Animals ON Owners.id = Animals.owners_id
+JOIN Species ON species_id = Species.id
+WHERE Species.id = 2  AND Owners.full_name = 'Jennifer Orwell';
+
+--List all animals owned by Dean Winchester that haven't tried to escape.
+
+SELECT Animals.name, Animals.escape_attempts, Owners.full_name
+FROM Owners
+JOIN Animals ON Owners.id = Animals.owners_id
+WHERE Owners.full_name = 'Dean Winchester' AND escape_attempts <= 0;
+
+SELECT full_name, COUNT(DISTINCT Animals.name) count FROM animals JOIN owners ON Animals.owners_id = owners.id
+GROUP BY full_name ORDER BY count DESC LIMIT 1;
