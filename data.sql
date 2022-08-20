@@ -81,6 +81,18 @@ INSERT INTO Owners (full_name, age) VALUES ('Jodie Whittaker',38);
 INSERT INTO Species (name) VALUES('Pokemon');
 INSERT INTO Species (name) VALUES('Digimon');
 
+/*Vets*/
+INSERT INTO Vets(name, age,  date_of_graduation) VALUES('William Tatcher', 45, 'Apr 23, 2000');
+INSERT INTO Vets(name, age,  date_of_graduation) VALUES('Maisy Smith', 26, 'Jan 17, 2019');
+INSERT INTO Vets(name, age,  date_of_graduation) VALUES('Stephanie Mendez', 64, 'May 4, 1981');
+INSERT INTO Vets(name, age,  date_of_graduation) VALUES('Jack Harkness', 38, 'Jun 8, 2008');
+
+ /*specializations*/
+ INSERT INTO specializations (vet_id, spicies_id) VALUES ( (SELECT id FROM vets WHERE name = 'William Tatcher'), (SELECT id FROM spicies WHERE name = 'Pokemon'));
+INSERT INTO specializations (vet_id, spicies_id) VALUES ((SELECT id FROM vets WHERE name = 'Stephanie Mendez'), (SELECT id FROM spicies WHERE name = 'Pokemon'));
+INSERT INTO specializations (vet_id, spicies_id) VALUES ((SELECT id FROM vets WHERE name = 'Stephanie Mendez'), (SELECT id FROM spicies WHERE name = 'Digimon'));
+INSERT INTO specializations (vet_id, spicies_id) VALUES ((SELECT id FROM vets WHERE name = 'Jack Harkness'), (SELECT id FROM spicies WHERE name = 'Digimon'));
+
  /* Modify your inserted animals so it includes the species_id value */
  BEGIN;
  UPDATE Animals
