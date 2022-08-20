@@ -97,6 +97,11 @@ UPDATE Animals
 SET  owners_id = 1
 WHERE name =  'Agumon';
 
+/*suggest by reviewer*/
+UPDATE animals
+   SET owners_id = (SELECT id from owners WHERE full_name = 'Jennifer Orwell')
+   WHERE name = 'Gabumon' OR name = 'Pikachu';
+
 UPDATE Animals
 SET  owners_id = 3
 WHERE name = 'Devimon' ;
@@ -125,10 +130,6 @@ WHERE name =  'Angemon'
 UPDATE Animals
 SET  owners_id = 5
 WHERE name =  'Boarmon';
-
-UPDATE Animals
-SET  owners_id = 2
-WHERE owners_id IS NULL;
 
 COMMIT;
 
