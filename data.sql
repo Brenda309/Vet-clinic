@@ -94,25 +94,41 @@ COMMIT;
 
 /*Modify your inserted animals to include owner information (owner_id)*/
 UPDATE Animals
-SET  owner_id = 1
-WHERE name =  Agumon;
+SET  owners_id = 1
+WHERE name =  'Agumon';
 
 UPDATE Animals
-SET  owner_id = 2
-WHERE name = Gabumon AND Pikachu;
+SET  owners_id = 3
+WHERE name = 'Devimon' ;
 
 UPDATE Animals
-SET  owner_id = 3
-WHERE name = Devimon AND Plantmon;
+SET  owners_id = 3
+WHERE name = 'Plantmon';
 
 UPDATE Animals
-SET  owner_id = 4
-WHERE name = Charmander AND Squirtle, AND Blossom;
+SET  owners_id = 4
+WHERE name = 'Charmander';
+
+ UPDATE Animals
+SET  owners_id = 4
+WHERE name ='Squirtle';
+
+ UPDATE Animals
+SET  owners_id = 4
+WHERE name = 'Blossom';
 
 
 UPDATE Animals
-SET  owner_id = 5
-WHERE name =  Angemon AND Boarmon;
+SET  owners_id = 5
+WHERE name =  'Angemon'  
 
-COMMIT
+UPDATE Animals
+SET  owners_id = 5
+WHERE name =  'Boarmon';
+
+UPDATE Animals
+SET  owners_id = 2
+WHERE owners_id IS NULL;
+
+COMMIT;
 
