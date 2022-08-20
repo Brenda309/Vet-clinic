@@ -36,5 +36,17 @@ SELECT species, AVG(escape_attempts) FROM Animals
  GROUP BY species;
 
 /*Owners*/
+-- What animals belong to Melody Pond?
+SELECT Animals.name, owners.full_name 
+FROM Owners
+INNER JOIN Animals ON Owners.id = Animals.owners_id
+WHERE full_name =' Melody Pond';
+
+-- List of all animals that are pokemon (their type is Pokemon)
+SELECT Animals.name, Species.name 
+FROM Owners
+INNER JOIN Animals ON Species.id = Animals.species_id;
+WHERE name = ' Pokemon';
+
 
  /*species*/
