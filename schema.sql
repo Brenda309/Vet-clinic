@@ -18,6 +18,24 @@ ADD CONSTRAINT Animals_pk PRIMARY KEY (id);
 /*Remove column species*/
 ALTER TABLE Animals
 DROP species;
+
+/*Add column species_id which is a foreign key referencing species table*/
+ALTER TABLE Animals
+ADD COLUMN species_id varchar(111);
+
+ALTER TABLE Animals
+ADD CONSTRAINT species_fk
+FOREIGN KEY (species_id) 
+REFERENCES Species (id);
+/*Add column owner_id which is a foreign key referencing the owners table*/
+ALTER TABLE Animals
+ADD COLUMN owners_id INT;
+
+ALTER TABLE Animals
+ADD CONSTRAINT owners_fk
+FOREIGN KEY (owners_id) 
+REFERENCES Owners (id);
+
 /*Owners*/
 CREATE TABLE Owners (
  id SERIAL PRIMARY KEY,
