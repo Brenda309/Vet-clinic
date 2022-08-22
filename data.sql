@@ -136,3 +136,48 @@ WHERE name =  'Boarmon';
 
 COMMIT;
 
+-- Insert the data into vets
+
+INSERT INTO Vets (name, age, date_of_graduation) VALUES('William Tatcher', 45, 'Apr 23, 2000');
+INSERT INTO Vets (name, age, date_of_graduation) VALUES(' Maisy Smith', 26, 'Jan 17, 2019');
+INSERT INTO Vets (name, age, date_of_graduation) VALUES('Stephanie Mendez', 64, 'May 4, 1981');
+INSERT INTO Vets (name, age, date_of_graduation) VALUES('Jack Harkness', 38, 'Jan 18, 2008');
+
+-- Insert the data into Specializations
+
+INSERT INTO Specializations(species_id, vets_id)
+VALUES((SELECT id FROM Species WHERE name = 'Pokemon'),
+(SELECT id FROM Vets WHERE name = 'William Tatcher'));
+
+INSERT INTO Specializations(species_id, vets_id)
+VALUES((SELECT id FROM Species WHERE name = 'Pokemon'),
+(SELECT id FROM Vets WHERE name =  'Stephanie Mendez'));
+
+INSERT INTO Specializations(species_id, vets_id)
+VALUES((SELECT id FROM Species WHERE name = 'Digimon'),
+(SELECT id FROM Vets WHERE name = 'Stephanie Mendez'));
+
+INSERT INTO Specializations(species_id, vets_id)
+VALUES((SELECT id FROM Species WHERE name = 'Digimon'),
+(SELECT id FROM Vets WHERE name = 'Jack Harkness'));
+
+-- Insert the data into Visits
+
+INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE name = 'Agumon'),
+(SELECT id FROM Vets WHERE name = 'William Tatcher'), 'May 24, 2020');
+
+INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE name = 'Agumon'),
+(SELECT id FROM Vets WHERE name = 'Stephanie Mendez'), 'Jul 22, 2020');
+
+-- INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+-- VALUES((SELECT id FROM Animals WHERE name = 'Gabumon'),
+-- (SELECT id FROM Vets WHERE name = 'Jack Harkness '), 'Feb 2, 2021');
+
+
+-- INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+-- VALUES((SELECT id FROM Animals WHERE name = 'Pikachu'),
+-- (SELECT id FROM Vets WHERE name = 'Maisy Smith'), 'Jan 5, 2020');
+
+

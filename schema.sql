@@ -78,3 +78,5 @@ PRIMARY KEY (animals_id, vets_id),
 FOREIGN Key (animals_id) REFERENCES Animals(id),
 FOREIGN Key (vets_id) REFERENCES Vets(id));
 
+ALTER TABLE Visits
+ ADD  date_of_visit date;
