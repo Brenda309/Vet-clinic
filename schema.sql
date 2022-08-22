@@ -47,6 +47,25 @@ CREATE TABLE Owners (
  id SERIAL PRIMARY KEY,
  name varchar(111));
 
+ /*Vets*/
+
+ CREATE TABLE Vets (
+ id SERIAL PRIMARY KEY,
+ name varchar(111),
+ age INT,
+ date_of_graduation date);
  
+--  to drop a table that has depedencies
+DROP TABLE if exists Vets cascade;
 
+-- Create a "join table" called specializations to handle this relationship
+DROP TABLE if exists Specializations cascade;
 
+CREATE TABLE Specializations(
+species_id INT,
+vets_id INT,
+PRIMARY KEY (species_id, vets_id),
+FOREIGN Key (species_id) REFERENCES Species(id),
+FOREIGN Key (vets_id) REFERENCES Vets(id));
+
+-- 
