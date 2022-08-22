@@ -171,13 +171,24 @@ INSERT INTO Visits(animals_id, vets_id, date_of_visit )
 VALUES((SELECT id FROM Animals WHERE name = 'Agumon'),
 (SELECT id FROM Vets WHERE name = 'Stephanie Mendez'), 'Jul 22, 2020');
 
--- INSERT INTO Visits(animals_id, vets_id, date_of_visit )
--- VALUES((SELECT id FROM Animals WHERE name = 'Gabumon'),
--- (SELECT id FROM Vets WHERE name = 'Jack Harkness '), 'Feb 2, 2021');
+INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE id = 2),
+(SELECT id FROM Vets WHERE id = 4), 'Feb 2, 2021');
 
 
--- INSERT INTO Visits(animals_id, vets_id, date_of_visit )
--- VALUES((SELECT id FROM Animals WHERE name = 'Pikachu'),
--- (SELECT id FROM Vets WHERE name = 'Maisy Smith'), 'Jan 5, 2020');
+INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE id = 3),
+  (SELECT id FROM Vets WHERE id = 2),'Jan 5, 2020');
 
 
+INSERT INTO Visits (animals_id, vets_id, date_of_visit)
+ VALUES((SELECT id FROM Animals WHERE id = 3),
+  (SELECT id FROM Vets WHERE id = 2),
+  'Mar 8, 2020');
+
+INSERT INTO Visits (animals_id, vets_id, date_of_visit) 
+VALUES((SELECT id FROM Animals WHERE id = 3),
+  (SELECT id FROM Vets WHERE id = 2),
+  'May 14, 2020');
+
+  
