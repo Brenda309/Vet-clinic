@@ -68,4 +68,13 @@ PRIMARY KEY (species_id, vets_id),
 FOREIGN Key (species_id) REFERENCES Species(id),
 FOREIGN Key (vets_id) REFERENCES Vets(id));
 
--- 
+-- Create a "join table" called visits to handle this relationship
+DROP TABLE if exists Visits cascade;
+
+CREATE TABLE Visits(
+animals_id INT,
+vets_id INT,
+PRIMARY KEY (animals_id, vets_id),
+FOREIGN Key (animals_id) REFERENCES Animals(id),
+FOREIGN Key (vets_id) REFERENCES Vets(id));
+
