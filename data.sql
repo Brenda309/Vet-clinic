@@ -211,3 +211,38 @@ INSERT INTO Visits(animals_id, vets_id, date_of_visit )
 VALUES((SELECT id FROM Animals WHERE id = 6),
 (SELECT id FROM Vets WHERE id = 1), ' Apr 7, 2021');
 
+INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE id = 7),
+(SELECT id FROM Vets WHERE name = 'Stephanie Mendez'), 'Sep 29, 2019');
+
+ INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE name = 'Angemon'),
+(SELECT id FROM Vets WHERE name = 'Jack Harkness'), 'Oct 3, 2020');
+
+ INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE name = 'Angemon'),
+(SELECT id FROM Vets WHERE name = 'Jack Harkness'), ' Nov 4, 2020');
+
+ INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE name = 'Boarmon'),
+(SELECT id FROM Vets WHERE id = 2), 'Jan 24, 2019');
+
+ INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE name = 'Boarmon'),
+(SELECT id FROM Vets WHERE id = 2), ' May 15, 2019');
+
+ INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE name = 'Boarmon'),
+(SELECT id FROM Vets WHERE id = 2), 'Feb 27, 2020');
+
+ INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE name = 'Boarmon'),
+(SELECT id FROM Vets WHERE id = 2), ' Aug 3, 2020');
+
+ INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE name = 'Boarmon'),
+(SELECT id FROM Vets WHERE id = 2), ' Jan 11, 2021');
+
+ INSERT INTO Visits(animals_id, vets_id, date_of_visit )
+VALUES((SELECT id FROM Animals WHERE name = 'Boarmon'),
+(SELECT id FROM Vets WHERE id = 2), ' May 24, 2020');
