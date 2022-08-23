@@ -1,10 +1,10 @@
 /* Database schema to keep the structure of entire database. */
 /*Animals*/
-CREATE TABLE Animals ( id INT GENERATED ALWAYS AS IDENTITY, 
-name varchar(110), 
-date_of_birth Date, 
-escape_attempts INT, 
-neutered  BOOLEAN, 
+CREATE TABLE Animals ( id INT GENERATED ALWAYS AS IDENTITY,
+name varchar(110),
+date_of_birth Date,
+escape_attempts INT,
+neutered  BOOLEAN,
  weight_kg float);
 
 /* Update the table by adding a new column */
@@ -25,7 +25,7 @@ ADD COLUMN species_id INT;
 
 ALTER TABLE Animals
 ADD CONSTRAINT species_fk
-FOREIGN KEY (species_id) 
+FOREIGN KEY (species_id)
 REFERENCES Species (id);
 /*Add column owner_id which is a foreign key referencing the owners table*/
 ALTER TABLE Animals
@@ -33,7 +33,7 @@ ADD COLUMN owners_id INT;
 
 ALTER TABLE Animals
 ADD CONSTRAINT owners_fk
-FOREIGN KEY (owners_id) 
+FOREIGN KEY (owners_id)
 REFERENCES Owners (id);
 
 /*Owners*/
@@ -54,7 +54,7 @@ CREATE TABLE Owners (
  name varchar(111),
  age INT,
  date_of_graduation date);
- 
+
 --  to drop a table that has depedencies
 DROP TABLE if exists Vets cascade;
 
@@ -81,3 +81,10 @@ FOREIGN Key (vets_id) REFERENCES Vets(id));
 
 -- Add an email column to your owners table
 ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
+-- improved
+CREATE INDEX Visits_animals_id_asc ON Visits(animals_id ASC);
+
+DROP INDEX Visits_animals_id_asc;
+
+CREATE INDEX Visits_vets_asc ON Visits(vets_id ASC);

@@ -7,7 +7,7 @@ INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) V
 INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Devimon', 'May 12 2017', True, 11.0, 5);
 
 /* new data */
-INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Charmander','Feb 8, 2020', False, -11, 0); 
+INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Charmander','Feb 8, 2020', False, -11, 0);
 INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Plantmon','Nov 15, 2021', True, -5.7, 2);
 INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Squirtle','Apr 2, 1993', False, -12.13, 3);
 INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Angemon','Jun 12, 2005', True, -45, 1);
@@ -15,26 +15,26 @@ INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) V
 INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Blossom','Oct 13, 1998', True, 17, 3);
 INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Ditto','May 14, 2022', True, 22, 4);
 
-*Update table*/ 
+*Update table*/
 
 BEGIN;
-UPDATE Animals 
+UPDATE Animals
 SET species  = 'unspecified';
 
-/*Undo the chance*/ 
+/*Undo the chance*/
 
 ROLLBACK;
 
 /*Update the animals table by setting the species column to digimon for all animals that have a name ending in mon.*/
 BEGIN;
-UPDATE Animals 
+UPDATE Animals
 SET species  = 'digimon'
 WHERE name LIKE '%mon';
 
 
 /*Update the animals table by setting the species column to pokemon for all animals that don't have species already set.*/
 
-UPDATE Animals 
+UPDATE Animals
 SET species  = 'pokemon'
 WHERE species IS NULL;
 COMMIT;
@@ -67,7 +67,7 @@ ROLLBACK TO SP1;
 
 UPDATE Animals
 SET weight_kg = -1
-WHERE weight_kg < 0; 
+WHERE weight_kg < 0;
 /*Owners*/
 INSERT INTO Owners (full_name, age) VALUES ('Sam Smith', 34);
 INSERT INTO Owners (full_name, age) VALUES ('Jennifer Orwell', 19);
@@ -128,7 +128,7 @@ WHERE name = 'Blossom';
 
 UPDATE Animals
 SET  owners_id = 5
-WHERE name =  'Angemon'  
+WHERE name =  'Angemon'
 
 UPDATE Animals
 SET  owners_id = 5
@@ -186,7 +186,7 @@ INSERT INTO Visits (animals_id, vets_id, date_of_visit)
   (SELECT id FROM Vets WHERE id = 2),
   'Mar 8, 2020');
 
-INSERT INTO Visits (animals_id, vets_id, date_of_visit) 
+INSERT INTO Visits (animals_id, vets_id, date_of_visit)
 VALUES((SELECT id FROM Animals WHERE id = 3),
   (SELECT id FROM Vets WHERE id = 2),
   'May 14, 2020');
@@ -271,7 +271,3 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM visits where animals_id = 4;
 EXPLAIN ANALYZE SELECT * FROM visits where vets_id = 2;
 EXPLAIN ANALYZE SELECT * FROM owners where email = 'owner_18327@mail.com';
 
-
--- improved 
-
- CREATE INDEX Visits_animals_id_asc ON Visits(animals_id ASC); 
