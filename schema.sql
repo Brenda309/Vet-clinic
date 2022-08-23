@@ -78,3 +78,7 @@ date_of_visit date,
 PRIMARY KEY (animals_id, vets_id, date_of_visit),
 FOREIGN Key (animals_id) REFERENCES Animals(id),
 FOREIGN Key (vets_id) REFERENCES Vets(id));
+
+
+-- Add an email column to your owners table
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
