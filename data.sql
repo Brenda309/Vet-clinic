@@ -1,273 +1,140 @@
 /*Animals*/
-/* Populate database with sample data. */
 
-INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Agumon', 'Feb 3, 2020', True, 10.23, 0);
-INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES (' Gabumon', 'Nov 15, 2018', True, 8.0, 2);
-INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES (' Pikachu', 'Jan 7, 2021,', False, 15.04, 1);
-INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Devimon', 'May 12 2017', True, 11.0, 5);
-
-/* new data */
-INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Charmander','Feb 8, 2020', False, -11, 0);
-INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Plantmon','Nov 15, 2021', True, -5.7, 2);
-INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Squirtle','Apr 2, 1993', False, -12.13, 3);
-INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Angemon','Jun 12, 2005', True, -45, 1);
-INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Boarmon','Jun 7, 2005', True, 20.4, 7);
-INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Blossom','Oct 13, 1998', True, 17, 3);
-INSERT INTO Animals(name, date_of_birth, neutered, weight_kg, escape_attempts) VALUES ('Ditto','May 14, 2022', True, 22, 4);
-
-*Update table*/
-
-BEGIN;
-UPDATE Animals
-SET species  = 'unspecified';
-
-/*Undo the chance*/
-
-ROLLBACK;
-
-/*Update the animals table by setting the species column to digimon for all animals that have a name ending in mon.*/
-BEGIN;
-UPDATE Animals
-SET species  = 'digimon'
-WHERE name LIKE '%mon';
-
-
-/*Update the animals table by setting the species column to pokemon for all animals that don't have species already set.*/
-
-UPDATE Animals
-SET species  = 'pokemon'
-WHERE species IS NULL;
-COMMIT;
-
-/*Delete a whole table and Rollback*/
-
-BEGIN;
-DELETE FROM Animals;
-ROLLBACK;
-
-/*Delete all animals born after Jan 1st, 2022*/
-BEGIN;
-DELETE FROM Animals
-WHERE date_of_birth >  'Jan, 1, 2022';
-
-/*Create a savepoint for the transaction.*/
-BEGIN;
- SAVEPOINT SP1;
-
-/*Update all animals' weight to be their weight multiplied by -1*/
-
-UPDATE Animals
-SET weight_kg = -1;
-
-/*Rollback to the savepoint*/
-
-ROLLBACK TO SP1;
-
-/*Update all animals' weights that are negative to be their weight multiplied by -1*/
-
-UPDATE Animals
-SET weight_kg = -1
-WHERE weight_kg < 0;
-/*Owners*/
-INSERT INTO Owners (full_name, age) VALUES ('Sam Smith', 34);
-INSERT INTO Owners (full_name, age) VALUES ('Jennifer Orwell', 19);
-INSERT INTO Owners (full_name, age) VALUES ('Bob', 45);
-INSERT INTO Owners (full_name, age) VALUES ('Melody Pond',77);
-INSERT INTO Owners (full_name, age) VALUES ('Dean Winchester',14);
-INSERT INTO Owners (full_name, age) VALUES ('Jodie Whittaker',38);
-
-
-/*Species*/
-INSERT INTO Species (name) VALUES('Pokemon');
-INSERT INTO Species (name) VALUES('Digimon');
-
-
-
-
- /* Modify your inserted animals so it includes the species_id value */
- BEGIN;
- UPDATE Animals
- SET species_id = 1
- WHERE name LIKE '%mon';
-
-UPDATE Animals
-SET species_id = 2
-WHERE species_id IS NULL;
-COMMIT;
-
-/*Modify your inserted animals to include owner information (owner_id)*/
-UPDATE Animals
-SET  owners_id = 1
-WHERE name =  'Agumon';
-
-/*suggest by reviewer*/
-UPDATE animals
-   SET owners_id = (SELECT id from owners WHERE full_name = 'Jennifer Orwell')
-   WHERE name = 'Gabumon' OR name = 'Pikachu';
-
-UPDATE Animals
-SET  owners_id = 3
-WHERE name = 'Devimon' ;
-
-UPDATE Animals
-SET  owners_id = 3
-WHERE name = 'Plantmon';
-
-UPDATE Animals
-SET  owners_id = 4
-WHERE name = 'Charmander';
-
- UPDATE Animals
-SET  owners_id = 4
-WHERE name ='Squirtle';
-
- UPDATE Animals
-SET  owners_id = 4
-WHERE name = 'Blossom';
-
-
-UPDATE Animals
-SET  owners_id = 5
-WHERE name =  'Angemon'
-
-UPDATE Animals
-SET  owners_id = 5
-WHERE name =  'Boarmon';
-
-COMMIT;
-
--- Insert the data into vets
-
-INSERT INTO Vets (name, age, date_of_graduation) VALUES('William Tatcher', 45, 'Apr 23, 2000');
-INSERT INTO Vets (name, age, date_of_graduation) VALUES(' Maisy Smith', 26, 'Jan 17, 2019');
-INSERT INTO Vets (name, age, date_of_graduation) VALUES('Stephanie Mendez', 64, 'May 4, 1981');
-INSERT INTO Vets (name, age, date_of_graduation) VALUES('Jack Harkness', 38, 'Jan 18, 2008');
-
--- Insert the data into Specializations
-
-INSERT INTO Specializations(species_id, vets_id)
-VALUES((SELECT id FROM Species WHERE name = 'Pokemon'),
-(SELECT id FROM Vets WHERE name = 'William Tatcher'));
-
-INSERT INTO Specializations(species_id, vets_id)
-VALUES((SELECT id FROM Species WHERE name = 'Pokemon'),
-(SELECT id FROM Vets WHERE name =  'Stephanie Mendez'));
-
-INSERT INTO Specializations(species_id, vets_id)
-VALUES((SELECT id FROM Species WHERE name = 'Digimon'),
-(SELECT id FROM Vets WHERE name = 'Stephanie Mendez'));
-
-INSERT INTO Specializations(species_id, vets_id)
-VALUES((SELECT id FROM Species WHERE name = 'Digimon'),
-(SELECT id FROM Vets WHERE name = 'Jack Harkness'));
-
--- Insert the data into Visits
-
-INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE name = 'Agumon'),
-(SELECT id FROM Vets WHERE name = 'William Tatcher'), 'May 24, 2020');
-
-INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE name = 'Agumon'),
-(SELECT id FROM Vets WHERE name = 'Stephanie Mendez'), 'Jul 22, 2020');
-
-INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE id = 2),
-(SELECT id FROM Vets WHERE id = 4), 'Feb 2, 2021');
-
-
-INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE id = 3),
-  (SELECT id FROM Vets WHERE id = 2),'Jan 5, 2020');
-
-
-INSERT INTO Visits (animals_id, vets_id, date_of_visit)
- VALUES((SELECT id FROM Animals WHERE id = 3),
-  (SELECT id FROM Vets WHERE id = 2),
-  'Mar 8, 2020');
-
-INSERT INTO Visits (animals_id, vets_id, date_of_visit)
-VALUES((SELECT id FROM Animals WHERE id = 3),
-  (SELECT id FROM Vets WHERE id = 2),
-  'May 14, 2020');
-
-  INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE name = 'Devimon'),
-(SELECT id FROM Vets WHERE name = 'Stephanie Mendez'), 'May 4, 2021');
-
-INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE name = 'Charmander'),
-(SELECT id FROM Vets WHERE name = 'Jack Harkness'), ' Feb 24, 2021');
-
-  INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE id = 6),
-(SELECT id FROM Vets WHERE id = 2), 'Dec 21, 2019');
-
-INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE id = 6),
-(SELECT id FROM Vets WHERE id = 1), ' Aug 10, 2020');
-
-INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE id = 6),
-(SELECT id FROM Vets WHERE id = 1), ' Apr 7, 2021');
-
-INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE id = 7),
-(SELECT id FROM Vets WHERE name = 'Stephanie Mendez'), 'Sep 29, 2019');
-
- INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE name = 'Angemon'),
-(SELECT id FROM Vets WHERE name = 'Jack Harkness'), 'Oct 3, 2020');
-
- INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE name = 'Angemon'),
-(SELECT id FROM Vets WHERE name = 'Jack Harkness'), ' Nov 4, 2020');
-
- INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE name = 'Boarmon'),
-(SELECT id FROM Vets WHERE id = 2), 'Jan 24, 2019');
-
- INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE name = 'Boarmon'),
-(SELECT id FROM Vets WHERE id = 2), ' May 15, 2019');
-
- INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE name = 'Boarmon'),
-(SELECT id FROM Vets WHERE id = 2), 'Feb 27, 2020');
-
- INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE name = 'Boarmon'),
-(SELECT id FROM Vets WHERE id = 2), ' Aug 3, 2020');
-
- INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE name = 'Boarmon'),
-(SELECT id FROM Vets WHERE id = 2), ' Jan 11, 2021');
-
- INSERT INTO Visits(animals_id, vets_id, date_of_visit )
-VALUES((SELECT id FROM Animals WHERE name = 'Boarmon'),
-(SELECT id FROM Vets WHERE id = 2), ' May 24, 2020');
-
-
--- database performance audit
-
-
--- This will add 3.594.280 visits considering you have 10 animals, 4 vets, and it will use around ~87.000 timestamps (~4min approx.)
-INSERT INTO Visits (animals_id, vets_id, date_of_visit) SELECT * FROM (SELECT id FROM Animals) animals_ids, (SELECT id FROM Vets) vets_ids, generate_series('1980-01-01'::timestamp, '2021-01-01', '4 hours') visit_timestamp;
-
--- This will add 2.500.000 owners with full_name = 'Owner <X>' and email = 'owner_<X>@email.com' (~2min approx.)
-insert into Owners (full_name, email) select 'Owner ' || generate_series(1,2500000), 'owner_' || generate_series(1,2500000) || '@mail.com';
-
- explain analyze SELECT COUNT(*) FROM visits where animals_id = 4;
-
-
---  queries to test
-
-SELECT COUNT(*) FROM visits where animals_id = 4;
-SELECT * FROM visits where vets_id = 2;
-SELECT * FROM owners where email = 'owner_18327@mail.com';
-
--- Analyse 
-EXPLAIN ANALYZE SELECT COUNT(*) FROM visits where animals_id = 4;
-EXPLAIN ANALYZE SELECT * FROM visits where vets_id = 2;
-EXPLAIN ANALYZE SELECT * FROM owners where email = 'owner_18327@mail.com';
-
+/*Queries that provide answers to the questions from all projects.*/
+
+SELECT * FROM Animals WHERE name LIKE '%mon'; 
+SELECT name FROM Animals WHERE date_of_birth BETWEEN 'Jan, 1, 2016' AND 'Dec, 31, 2019';
+SELECT name FROM Animals WHERE neutered = true AND escape_attempts < 3;
+SELECT date_of_birth FROM Animals WHERE name = 'Agumon' OR  name = 'Pikachu';
+SELECT name, escape_attempts FROM Animals WHERE weight_kg > 10.5;
+SELECT * FROM Animals WHERE neutered = True;
+SELECT * FROM Animals WHERE name != ' Gabumon';
+SELECT * FROM Animals WHERE weight_kg BETWEEN 10.4 AND 17.3;
+
+/* Total number of animals in the table*/
+SELECT COUNT(*) FROM Animals;
+
+/* Animals have never tried to escape?*/
+
+SELECT COUNT(*) FROM Animals
+WHERE escape_attempts <= 0;
+
+/* the average weight of animals?*/
+
+SELECT AVG(weight_kg) FROM Animals;
+/*  Escaped the most */
+SELECT neutered, SUM(escape_attempts) FROM Animals GROUP BY neutered;
+
+/*Min and max weight each animal species */
+
+ SELECT species, MIN(weight_kg), Max(weight_kg) FROM Animals GROUP BY species;
+
+/*AVG number of escape attempt for each animal species born  between 1990 and 2000*/
+
+SELECT species, AVG(escape_attempts) FROM Animals 
+ WHERE date_of_birth BETWEEN 'Jan, 1, 1990' AND 'Dec, 31, 2000'
+ GROUP BY species;
+
+-- What animals belong to Melody Pond?
+SELECT Animals.name, owners.full_name 
+FROM Owners
+INNER JOIN Animals ON Owners.id = Animals.owners_id
+WHERE full_name =' Melody Pond';
+
+-- List of all animals that are pokemon (their type is Pokemon)
+SELECT Animals.name, Species.name  
+FROM Animals
+JOIN Species ON species_id = Species.id
+WHERE Species.name = 'Pokemon';
+
+-- List all owners and their animals, remember to include those that don't own any animal
+SELECT owners.full_name, Animals.name
+FROM Owners
+ JOIN Animals ON Owners.id = Animals.owners_id
+WHERE Owners.id = Animals.owners_id
+OR  Owners.id != Animals.owners_id;
+
+--How many animals are there per species?
+SELECT COUNT(*) FROM Animals, species
+FROM Animals
+JOIN Species ON species_id = Species.id
+ GROUP BY species;
+
+--List all Digimon owned by Jennifer Orwell.
+SELECT Species.name, Animals.name, Owners.full_name
+FROM Owners
+JOIN Animals ON Owners.id = Animals.owners_id
+JOIN Species ON species_id = Species.id
+WHERE Species.id = 2  AND Owners.full_name = 'Jennifer Orwell';
+
+--List all animals owned by Dean Winchester that haven't tried to escape.
+SELECT Animals.name, Animals.escape_attempts, Owners.full_name
+FROM Owners
+JOIN Animals ON Owners.id = Animals.owners_id
+WHERE Owners.full_name = 'Dean Winchester' AND escape_attempts <= 0;
+
+--Who owns the most animals?
+SELECT Owners, COUNT(DISTINCT Animals.name) count FROM animals JOIN owners ON Animals.owners_id = owners.id
+GROUP BY Owners ORDER BY count DESC LIMIT 1;
+
+--Who was the last animal seen by William Tatcher?
+SELECT vets.name, visits.date_of_visit, animals.name animal 
+FROM animals JOIN visits ON animals.id = visits.animal_id 
+JOIN vets ON vets.id = visits.vet_id 
+WHERE vets.name = 'William Tatcher' 
+ORDER BY visits.date_of_visit DESC FETCH FIRST ROW ONLY;
+
+-- How many different animals did Stephanie Mendez see?
+SELECT name, COUNT(DISTINCT animal_id) FROM visits JOIN vets ON vet_id = vets.id
+  WHERE name = 'Stephanie Mendez' GROUP BY name;
+
+  -- List all vets and their specialties, including vets with no specialties.
+SELECT vets.name, species.name FROM vets 
+LEFT JOIN specializations ON vet_id = vets.id 
+LEFT JOIN species ON species_id = species.id 
+ORDER BY vets.name, species.name;
+
+-- List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
+SELECT Animals.name Animals 
+FROM animals JOIN visits ON animals.id = visits.animal_id 
+JOIN vets ON vets.id = visits.vet_id 
+WHERE vets.name = 'Stephanie Mendez' AND visits.date_of_visit BETWEEN 'April 1, 2020' AND 'August 30, 2020';
+
+-- What animal has the most visits to vets?
+SELECT animals.name animals, COUNT(animals.name) visited_times 
+FROM animals JOIN visits ON visits.animal_id = animals.id 
+JOIN vets ON vets.id = visits.vet_id 
+GROUP BY animals.name 
+ORDER BY visited_times DESC LIMIT 1;
+
+-- Who was Maisy Smith's first visit?
+SELECT vets.name, animals.name, date_of_visit 
+FROM visits JOIN vets ON vet_id = vets.id 
+JOIN animals ONanimal_id = animals.id 
+WHERE vets.name = 'Maisy Smith' 
+ORDER BY date_of_visit LIMIT 1;
+
+
+-- Details for most recent visit: animal information, vets information, and date of visit.
+SELECT animals.name animals, vets.name vets, visits.date_of_visit  
+FROM visits JOIN vets ON visits.vet_id = vets.id 
+JOIN animals ON visits.animal_id = animals.id 
+ORDER BY visits.date_of_visit  DESC LIMIT 1;
+
+-- How many visits were with a vet that did not specialize in that animal's species?
+SELECT COUNT(date_of_visit) FROM vets LEFT JOIN visits V ON V.vet_id = vets.id LEFT JOIN specializations S ON
+  S.vet_id = vets.id LEFT JOIN animals ON animal_id = animals.id 
+  WHERE Animals.spicies_id NOT IN (SELECT spicies_id FROM specializations WHERE vet_id = vets.id) OR S.spicies_id IS NULL;
+
+  
+  -- How many visits were with a vets that did not specialize in that animal's species?
+
+SELECT COUNT(vets.name) FROM vets 
+WHERE vets.id NOT IN (SELECT vet_id FROM specializations);
+
+-- What specialty should Maisy Smith consider getting? Look for the species she gets the most.
+SELECT  species.name,  count(*)  
+FROM visits JOIN animals ON visits.animal_id = animals.id 
+JOIN species ON animals.species_id = species.id JOIN vets ON visits.vet_id = vets.id 
+GROUP BY species.name, vets.name HAVING vets.name = 'Maisy Smith' 
+ORDER BY count(*) DESC LIMIT 1;
