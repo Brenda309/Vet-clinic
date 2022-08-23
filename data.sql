@@ -273,4 +273,5 @@ EXPLAIN ANALYZE SELECT * FROM owners where email = 'owner_18327@mail.com';
 
 
 -- improved 
+
  CREATE INDEX Visits_animals_id_asc ON Visits(animals_id ASC); 
