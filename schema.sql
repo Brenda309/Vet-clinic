@@ -1,10 +1,10 @@
 /* Database schema to keep the structure of entire database. */
 /*Animals*/
-CREATE TABLE Animals ( id INT GENERATED ALWAYS AS IDENTITY, 
-name varchar(110), 
-date_of_birth Date, 
-escape_attempts INT, 
-neutered  BOOLEAN, 
+CREATE TABLE Animals ( id INT GENERATED ALWAYS AS IDENTITY,
+name varchar(110),
+date_of_birth Date,
+escape_attempts INT,
+neutered  BOOLEAN,
  weight_kg float);
 
 /* Update the table by adding a new column */
@@ -25,7 +25,7 @@ ADD COLUMN species_id INT;
 
 ALTER TABLE Animals
 ADD CONSTRAINT species_fk
-FOREIGN KEY (species_id) 
+FOREIGN KEY (species_id)
 REFERENCES Species (id);
 /*Add column owner_id which is a foreign key referencing the owners table*/
 ALTER TABLE Animals
@@ -33,7 +33,7 @@ ADD COLUMN owners_id INT;
 
 ALTER TABLE Animals
 ADD CONSTRAINT owners_fk
-FOREIGN KEY (owners_id) 
+FOREIGN KEY (owners_id)
 REFERENCES Owners (id);
 
 /*Owners*/
@@ -47,39 +47,44 @@ CREATE TABLE Owners (
  id SERIAL PRIMARY KEY,
  name varchar(111));
 
- /*vets*/
-CREATE TABLE Vets (
+ /*Vets*/
+
+ CREATE TABLE Vets (
  id SERIAL PRIMARY KEY,
  name varchar(111),
  age INT,
- date_of_graduation Date);
+ date_of_graduation date);
 
-/*Joining table*/
-CREATE TABLE specializations(
-  vet_id INT ,
-  spicies_id INT ,
-  PRIMARY KEY(vet_id, spicies_id));
+--  to drop a table that has depedencies
+DROP TABLE if exists Vets cascade;
 
-/*Visitis*/
+-- Create a "join table" called specializations to handle this relationship
+DROP TABLE if exists Specializations cascade;
+
+CREATE TABLE Specializations(
+species_id INT,
+vets_id INT,
+PRIMARY KEY (species_id, vets_id),
+FOREIGN Key (species_id) REFERENCES Species(id),
+FOREIGN Key (vets_id) REFERENCES Vets(id));
+
+-- Create a "join table" called visits to handle this relationship
+DROP TABLE if exists Visits cascade;
+
 CREATE TABLE Visits(
-  vet_id INT,
-  animal_id INT,
-  date_of_visit date,
-  PRIMARY KEY(vet_id, animal_id, date_of_visit));
+animals_id INT,
+vets_id INT,
+date_of_visit date,
+FOREIGN Key (animals_id) REFERENCES Animals(id),
+FOREIGN Key (vets_id) REFERENCES Vets(id));
 
 
-ALTER TABLE Visits 
-ADD FOREIGN KEY(animal_id) 
-REFERENCES Animals(id);
+-- Add an email column to your owners table
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
 
-ALTER TABLE Visits 
-ADD FOREIGN KEY(vet_id) 
-REFERENCES Vets(id);
+-- improved
+CREATE INDEX Visits_animals_id_asc ON Visits(animals_id ASC);
 
-ALTER TABLE specializations 
-ADD FOREIGN KEY(spicies_id) 
-REFERENCES Species(id);
+DROP INDEX Visits_animals_id_asc;
 
-ALTER TABLE specializations 
-ADD FOREIGN KEY(vet_id)
- REFERENCES Vets(id);
+CREATE INDEX Visits_vets_asc ON Visits(vets_id ASC);

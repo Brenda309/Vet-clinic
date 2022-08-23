@@ -8,11 +8,11 @@ In this project, I will use a relational database to create the initial data str
 
 ## Getting Started
 
-This repository includes SQL files that contains data for Vet-Clinic. 
+This repository includes SQL files that contains data for Vet-Clinic.
 
 - Used [schema.sql](./schema.sql) to create all tables.
 - Used [data.sql](./data.sql) to populate tables with sample data.
-- Checked [queries.sql](./queries.sql) 
+- Checked [queries.sql](./queries.sql)
 
 ## Clone this repository
 
@@ -23,7 +23,7 @@ This repository includes SQL files that contains data for Vet-Clinic.
       $ psql to enter database
       $ SELECT * FROM; Animals to see data
       $ \q to exit
-      
+
 ### Setup
 - Text editor
 - Terminal
@@ -34,10 +34,14 @@ This repository includes SQL files that contains data for Vet-Clinic.
 ## Authors
 
 👤 **Brenda Wihogora**
-
 - GitHub: [@Brenda309](https://github.com/Brenda309)
 - Twitter: [@BrendaWihogora](https://twitter.com/BrendaWihogora)
 - LinkedIn: [BrendaWihogora](https://linkedin.com/in/BrendaWihogora/)
+
+👤 **NduatiKagiri**
+- GitHub: [@NduatiKagiri](https://github.com/NduatiKagiri)
+- Twitter: [@NduatiKagiri](https://twitter.com/NduatiKagiri)
+- LinkedIn: [nduati-kagiri](https://linkedin.com/in/nduati-kagiri/)
 
 ## 🤝 Contributing
 
