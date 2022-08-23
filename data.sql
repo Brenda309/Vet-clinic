@@ -257,4 +257,16 @@ INSERT INTO Visits (animals_id, vets_id, date_of_visit) SELECT * FROM (SELECT id
 -- This will add 2.500.000 owners with full_name = 'Owner <X>' and email = 'owner_<X>@email.com' (~2min approx.)
 insert into Owners (full_name, email) select 'Owner ' || generate_series(1,2500000), 'owner_' || generate_series(1,2500000) || '@mail.com';
 
- explain analyze SELECT COUNT(*) FROM visits where animals_id = 4
+ explain analyze SELECT COUNT(*) FROM visits where animals_id = 4;
+
+
+--  queries to test
+
+SELECT COUNT(*) FROM visits where animals_id = 4;
+SELECT * FROM visits where vets_id = 2;
+SELECT * FROM owners where email = 'owner_18327@mail.com';
+
+-- Anlyse 
+EXPLAIN ANALYZE SELECT COUNT(*) FROM visits where animals_id = 4;
+EXPLAIN ANALYZE SELECT * FROM visits where vets_id = 2;
+EXPLAIN ANALYZE SELECT * FROM owners where email = 'owner_18327@mail.com';
