@@ -13,7 +13,7 @@ CREATE TABLE medical_histories (
 
 CREATE TABLE invoices(
      id SERIAL PRIMARY KEY,
-     total_amount decimal,
+     total_amount DECIMAL,
      generated_at timestamp,
      payed_at timestamp,
      medical_history_id int,
@@ -24,4 +24,15 @@ CREATE TABLE treatments (
   id SERIAL PRIMARY KEY,
   type varchar(50),
   name varchar(100)
+);
+
+CREATE TABLE invoices_items (
+ id SERIAL PRIMARY KEY,  
+ unit_price DECIMAL,
+ quantity INT,
+ total_price DECIMAL,
+ invoices_id INT,
+ treatment_id INT,
+  FOREIGN KEY (invoices_id) REFERENCES invoices(id),
+  FOREIGN KEY (treatment_id) REFERENCES treatments(id)
 );
