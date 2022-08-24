@@ -6,6 +6,10 @@ In this project, I will use a relational database to create the initial data str
 
 - SQL
 
+## Database schema diagram
+![vet_clinic_diagram_schema](https://user-images.githubusercontent.com/72613775/186489286-e795f320-3bdd-4270-8759-863000cf2b20.png)
+
+
 ## Getting Started
 
 This repository includes SQL files that contains data for Vet-Clinic. 
