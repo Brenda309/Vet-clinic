@@ -19,3 +19,9 @@ CREATE TABLE invoices(
      medical_history_id int,
      FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id)
 );
+
+CREATE TABLE treatments (
+  id SERIAL PRIMARY KEY,
+  type varchar(50),
+  name varchar(100)
+);
