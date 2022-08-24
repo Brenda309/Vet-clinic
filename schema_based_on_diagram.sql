@@ -1,7 +1,7 @@
 CREATE TABLE patients (
- id SERIAL PRIMARY KEY,
- name varchar(111),
- date_of_birth date);
+  id SERIAL PRIMARY KEY,
+  name varchar(111),
+  date_of_birth date);
 
 CREATE TABLE medical_histories (
   id SERIAL PRIMARY KEY,
@@ -12,12 +12,12 @@ CREATE TABLE medical_histories (
 );
 
 CREATE TABLE invoices(
-     id SERIAL PRIMARY KEY,
-     total_amount DECIMAL,
-     generated_at timestamp,
-     payed_at timestamp,
-     medical_history_id int,
-     FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id)
+  id SERIAL PRIMARY KEY,
+  total_amount DECIMAL,
+  generated_at timestamp,
+  payed_at timestamp,
+  medical_history_id int,
+  FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id)
 );
 
 CREATE TABLE treatments (
@@ -27,21 +27,21 @@ CREATE TABLE treatments (
 );
 
 CREATE TABLE invoices_items (
- id SERIAL PRIMARY KEY,  
- unit_price DECIMAL,
- quantity INT,
- total_price DECIMAL,
- invoices_id INT,
- treatment_id INT,
+  id SERIAL PRIMARY KEY,
+  unit_price DECIMAL,
+  quantity INT,
+  total_price DECIMAL,
+  invoices_id INT,
+  treatment_id INT,
   FOREIGN KEY (invoices_id) REFERENCES invoices(id),
   FOREIGN KEY (treatment_id) REFERENCES treatments(id)
 );
 
 CREATE TABLE medical_history_treatments(
-    treatment_id  INT,
-    medical_history_id INT,
-    FOREIGN KEY(treatment_id) REFERENCES treatments(id)
-    FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id)
+  treatment_id  INT,
+  medical_history_id INT,
+  FOREIGN KEY(treatment_id) REFERENCES treatments(id)
+  FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id)
 );
 
 CREATE INDEX Histories_patient ON medical_histories(patient_id ASC);
